@@ -21,7 +21,6 @@
 # SOFTWARE.
 import struct
 
-
 # Minimal constants carried over from Arduino library:
 LSM303_ADDRESS_ACCEL = (0x32 >> 1)  # 0011001x
 LSM303_ADDRESS_MAG   = (0x3C >> 1)  # 0011110x
@@ -75,15 +74,29 @@ class LSM303(object):
         be returned with:
           ((accel X, accel Y, accel Z), (mag X, mag Y, mag Z))
         """
+        return self.read_accelerometer(), self.read_magnetometer()
+
+    def read_accelerometer(self):
+
+        """
+        :rtype: (accel X, accel Y, accel Z)
+        """
         # Read the accelerometer as signed 16-bit little endian values.
         accel_raw = self._accel.readList(LSM303_REGISTER_ACCEL_OUT_X_L_A | 0x80, 6)
         accel = struct.unpack('<hhh', accel_raw)
         # Convert to 12-bit values by shifting unused bits.
         accel = (accel[0] >> 4, accel[1] >> 4, accel[2] >> 4)
-        # Read the magnetometer.
+        return accel
+
+    def read_magnetometer(self):
+
+        """
+        :rtype: (mag X, mag Y, mag Z)
+        """
         mag_raw = self._mag.readList(LSM303_REGISTER_MAG_OUT_X_H_M, 6)
         mag = struct.unpack('>hhh', mag_raw)
-        return (accel, mag)
+
+        return mag
 
     def set_mag_gain(self, gain=LSM303_MAGGAIN_1_3):
         """Set the magnetometer gain.  Gain should be one of the following
