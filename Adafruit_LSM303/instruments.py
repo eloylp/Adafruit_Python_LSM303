@@ -1,13 +1,15 @@
 from math import atan2, pi
 
 
-class Compass:
+class Instrument:
     def __init__(self, lsm303_sensor):
         """
         :type lsm303_sensor : Adafruit_LSM303.LSM303.LSM303
         """
         self.lsm303_sensor = lsm303_sensor
 
+
+class Compass(Instrument):
     def get_heading(self):
         magnet_axis_data = self.lsm303_sensor.read_magnetometer()
         heading_radians = atan2(magnet_axis_data[2], magnet_axis_data[0])
