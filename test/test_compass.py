@@ -3,7 +3,7 @@ from unittest import TestCase
 from ddt import ddt, data, unpack
 from mock import MagicMock
 
-from Adafruit_LSM303.helper import Compass
+from Adafruit_LSM303.instruments import Compass
 
 
 @ddt

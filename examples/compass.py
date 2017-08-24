@@ -3,7 +3,7 @@ import time
 import sys
 
 import Adafruit_LSM303
-from Adafruit_LSM303.helper import Compass
+from Adafruit_LSM303.instruments import Compass
 
 lsm303 = Adafruit_LSM303.LSM303()
 
