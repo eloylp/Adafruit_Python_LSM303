@@ -79,7 +79,7 @@ class LSM303(object):
     def read_accelerometer(self):
 
         """
-        :rtype: (accel X, accel Y, accel Z)
+        :rtype: (accel X, accel Y, accel Z) (meters per second squared)
         """
         # Read the accelerometer as signed 16-bit little endian values.
         accel_raw = self._accel.readList(LSM303_REGISTER_ACCEL_OUT_X_L_A | 0x80, 6)
@@ -91,7 +91,7 @@ class LSM303(object):
     def read_magnetometer(self):
 
         """
-        :rtype: (mag X, mag Y, mag Z)
+        :rtype: (mag X, mag Y, mag Z) (micro-Teslas)
         """
         mag_raw = self._mag.readList(LSM303_REGISTER_MAG_OUT_X_H_M, 6)
         mag = struct.unpack('>hhh', mag_raw)
