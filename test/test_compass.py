@@ -22,7 +22,7 @@ class TestCompass(TestCase):
     def test_get_heading(self, x, y, expected_degrees):
 
         lsm303 = MagicMock()
-        lsm303.read_magnetometer = MagicMock(return_value=(x, y))
+        lsm303.read_magnetometer = MagicMock(return_value=(x, 666, y))
         compass = Compass(lsm303)
         heading = compass.get_heading()
         self.assertEqual(expected_degrees, heading)
