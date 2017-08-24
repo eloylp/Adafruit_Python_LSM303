@@ -79,7 +79,7 @@ class LSM303(object):
     def read_accelerometer(self):
 
         """
-        :rtype: (accel X, accel Y, accel Z) (meters per second squared)
+        :rtype: (accel X, accel Z, accel Y ) (meters per second squared)
         """
         # Read the accelerometer as signed 16-bit little endian values.
         accel_raw = self._accel.readList(LSM303_REGISTER_ACCEL_OUT_X_L_A | 0x80, 6)
