@@ -49,8 +49,8 @@ class TestInclinometer(TestCase):
         inclinometer = Inclinometer(lsm303)
         inclinometer.vector_2_degrees = MagicMock(return_value=(degrees))
 
-        degrees = inclinometer.get_inclination()
-        self.assertEqual(expected_degrees, degrees[0])
-        self.assertEqual(expected_degrees, degrees[1])
+        inclination_degrees_per_axis = inclinometer.get_inclination()
+        self.assertEqual(expected_degrees, inclination_degrees_per_axis[0])
+        self.assertEqual(expected_degrees, inclination_degrees_per_axis[1])
 
 
