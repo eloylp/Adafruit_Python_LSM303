@@ -8,6 +8,13 @@ class Instrument:
         """
         self.lsm303_sensor = lsm303_sensor
 
+    def vector_2_degrees(self, x, y):
+        radians = atan2(y, x)
+        degrees = radians * 180 / pi
+        if degrees < 0:
+            degrees = 360 + degrees
+        return degrees
+
 
 class Compass(Instrument):
     def get_heading(self):

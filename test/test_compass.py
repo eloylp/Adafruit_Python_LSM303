@@ -3,11 +3,15 @@ from unittest import TestCase
 from ddt import ddt, data, unpack
 from mock import MagicMock
 
-from Adafruit_LSM303.instruments import Compass
+from Adafruit_LSM303.instruments import Compass, Instrument
 
 
 @ddt
-class TestCompass(TestCase):
+class TestInstrument(TestCase):
+    def setUp(self):
+        lsm303 = MagicMock()
+        self.instrument = Instrument(lsm303)
+
     @data(
         (0, 0, 0),
         (1, 0, 0),
@@ -19,10 +23,6 @@ class TestCompass(TestCase):
         (1, -0.0000000000000001, 360),
     )
     @unpack
-    def test_get_heading(self, x, y, expected_degrees):
-
-        lsm303 = MagicMock()
-        lsm303.read_magnetometer = MagicMock(return_value=(x, 666, y))
-        compass = Compass(lsm303)
-        heading = compass.get_heading()
-        self.assertEqual(expected_degrees, heading)
+    def test_vector_2_degrees(self, x, y, expected_degrees):
+        degrees = self.instrument.vector_2_degrees(x, y)
+        self.assertEqual(expected_degrees, degrees)
