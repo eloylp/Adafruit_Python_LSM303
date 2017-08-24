@@ -28,7 +28,7 @@ while True:
     accel_x, accel_y, accel_z = accel
     mag_x, mag_z, mag_y = mag
 
-    data = 'Accel X={0}, Accel Y={1}, Accel Z={2}, Mag X={3}, Mag Y={4}, Mag Z={5}'.format(accel_x, accel_y, accel_z,
+    data = '\rAccel X={0}, Accel Y={1}, Accel Z={2}, Mag X={3}, Mag Y={4}, Mag Z={5}'.format(accel_x, accel_y, accel_z,
                                                                                            mag_x, mag_y, mag_z)
     sys.stdout.write(data)
     sys.stdout.flush()
