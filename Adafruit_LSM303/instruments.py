@@ -19,8 +19,4 @@ class Instrument:
 class Compass(Instrument):
     def get_heading(self):
         magnet_axis_data = self.lsm303_sensor.read_magnetometer()
-        heading_radians = atan2(magnet_axis_data[2], magnet_axis_data[0])
-        heading_degrees = heading_radians * 180 / pi
-        if heading_degrees < 0:
-            heading_degrees = 360 + heading_degrees
-        return heading_degrees
+        return self.vector_2_degrees(magnet_axis_data[0], magnet_axis_data[2])
