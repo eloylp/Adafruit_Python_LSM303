@@ -28,10 +28,8 @@ class TestInstrument(TestCase):
         self.assertEqual(expected_degrees, degrees)
 
 
-
 @ddt
 class TestInclinometer(TestCase):
-
     @data(
         (10, 100),
         (89, 179),
@@ -43,8 +41,7 @@ class TestInclinometer(TestCase):
         (360, 90),
     )
     @unpack
-    def test_inclination_deviation_is_corrected(self, degrees, expected_degrees):
-
+    def test_measure_is_adapted(self, degrees, expected_degrees):
         lsm303 = MagicMock()
         inclinometer = Inclinometer(lsm303)
         inclinometer.vector_2_degrees = MagicMock(return_value=(degrees))
@@ -52,5 +49,3 @@ class TestInclinometer(TestCase):
         inclination_degrees_per_axis = inclinometer.get_inclination()
         self.assertEqual(expected_degrees, inclination_degrees_per_axis[0])
         self.assertEqual(expected_degrees, inclination_degrees_per_axis[1])
-
-
