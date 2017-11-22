@@ -1,4 +1,5 @@
-from math import atan2, pi
+from math import atan2, degrees
+
 
 
 class Instrument:
@@ -10,10 +11,10 @@ class Instrument:
 
     def vector_2_degrees(self, x, y):
         radians = atan2(y, x)
-        degrees = radians * 180 / pi
-        if degrees < 0:
-            degrees = 360 + degrees
-        return degrees
+        degrees_calc = degrees(radians)
+        if degrees_calc < 0:
+            degrees_calc = 360 + degrees_calc
+        return degrees_calc
 
 
 class Compass(Instrument):
